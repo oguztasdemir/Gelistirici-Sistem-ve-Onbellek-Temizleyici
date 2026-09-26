@@ -10,6 +10,12 @@
 
 **A high-performance desktop suite designed for developers and power users to deeply scan, inspect, and safely reclaim gigabytes of disk space from package managers, AI model weights, build dependencies, dormant files, and system junk.**
 
+<br/>
+
+<img src="docs/images/preview.png" alt="Cache Cleaner Dashboard Preview" width="100%" style="border-radius: 10px; box-shadow: 0 8px 24px rgba(0,0,0,0.5);" />
+
+<br/><br/>
+
 [English](#-english-documentation) • [Türkçe](#-türkçe-dokümantasyon) • [Installation](#-installation--quick-start) • [Architecture](#-project-architecture)
 
 </div>
@@ -72,13 +78,6 @@ pip install -r requirements.txt
 # 3. Launch application
 python main.py
 ```
-*(Or simply double-click `run.bat` on Windows)*
-
-### Option B: Build Standalone Windows Executable (.exe)
-```powershell
-python build_exe.py
-```
-The compiled executable will be located in `dist/CacheCleaner.exe`.
 
 ---
 
@@ -87,12 +86,9 @@ The compiled executable will be located in `dist/CacheCleaner.exe`.
 ```text
 cache-cleaner/
 ├── main.py                        # Modern Application Entry Point
-├── run.bat                        # 1-Click Windows Batch Launcher
-├── build_exe.py                   # Automated PyInstaller Executable Builder
 ├── requirements.txt               # Dependencies (customtkinter, psutil)
 ├── LICENSE                        # MIT License
 ├── README.md                      # GitHub Showcase Documentation
-├── PLANLAMA.md                    # Technical Architecture & Planning
 └── src/
     ├── config.py                  # 42+ Cache Targets, Colors & Theme Tokens
     ├── i18n.py                    # Multi-language Engine (Turkish & English)

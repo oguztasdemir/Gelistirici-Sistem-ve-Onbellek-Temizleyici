@@ -38,6 +38,8 @@ class SidebarComponent(ctk.CTkFrame):
         self.setup_ui()
 
     def setup_ui(self):
+        cur_lang = get_language()
+
         # 1. Branding Header
         brand_frame = ctk.CTkFrame(self, fg_color="transparent")
         brand_frame.pack(fill="x", padx=16, pady=(20, 16))
@@ -108,7 +110,6 @@ class SidebarComponent(ctk.CTkFrame):
             ("settings", "⚙️  İstatistik & Ayarlar", "⚙️  Stats & Settings")
         ]
 
-        cur_lang = get_language()
         for key, tr_label, en_label in self.nav_items:
             label = tr_label if cur_lang == "tr" else en_label
             is_active = (key == self.active_tab)
@@ -145,13 +146,13 @@ class SidebarComponent(ctk.CTkFrame):
         disk_header = ctk.CTkFrame(self.disk_card, fg_color="transparent")
         disk_header.pack(fill="x", padx=10, pady=(8, 4))
 
-        d_title = ctk.CTkLabel(
+        self.d_title = ctk.CTkLabel(
             disk_header,
-            text="💽 C: Sürücüsü",
-            font=ctk.CTkFont(family="Segoe UI", size=10, weight="bold"),
+            text="💽 C: Sürücüsü" if cur_lang == "tr" else "💽 C: Drive",
+            font=ctk.CTkFont(family="Segoe UI", size=11, weight="bold"),
             text_color=COLOR_TEXT_MAIN
         )
-        d_title.pack(side="left")
+        self.d_title.pack(side="left")
 
         try:
             total, used, free = shutil.disk_usage("C:\\")
@@ -167,8 +168,8 @@ class SidebarComponent(ctk.CTkFrame):
 
         self.disk_free_lbl = ctk.CTkLabel(
             disk_header,
-            text=f"{free_str} boş",
-            font=ctk.CTkFont(family="Segoe UI", size=9, weight="bold"),
+            text=f"{free_str} boş" if cur_lang == "tr" else f"{free_str} free",
+            font=ctk.CTkFont(family="Segoe UI", size=10, weight="bold"),
             text_color=COLOR_PRIMARY
         )
         self.disk_free_lbl.pack(side="right")
@@ -250,6 +251,8 @@ class SidebarComponent(ctk.CTkFrame):
             if key in self.nav_buttons:
                 label = tr_label if cur_lang == "tr" else en_label
                 self.nav_buttons[key].configure(text=label)
+        if hasattr(self, "d_title"):
+            self.d_title.configure(text="💽 C: Sürücüsü" if cur_lang == "tr" else "💽 C: Drive")
         try:
             total, used, free = shutil.disk_usage("C:\\")
             free_str = format_bytes(free)
